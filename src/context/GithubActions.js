@@ -3,15 +3,7 @@ export const searchUsers = async (query) => {
   const params = new URLSearchParams({
     q: query,
   })
-  const response = await fetch(
-    `https://api.github.com/search/users?${params}`,
-    {
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `token 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`,
-      },
-    }
-  )
+  const response = await fetch(`https://api.github.com/search/users?${params}`)
 
   const data = await response.json()
 
@@ -20,11 +12,7 @@ export const searchUsers = async (query) => {
 
 // Fetch a single user
 export const fetchUser = async (login) => {
-  const response = await fetch(`https://api.github.com/users/${login}`, {
-    headers: {
-      Authorization: `token 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`,
-    },
-  })
+  const response = await fetch(`https://api.github.com/users/${login}`)
 
   if (response.status === 404) {
     window.location = "/notfound"
@@ -42,12 +30,7 @@ export const fetchRepos = async (userId) => {
     per_page: 10,
   })
   const response = await fetch(
-    `https://api.github.com/users/${userId}/repos?${params}`,
-    {
-      headers: {
-        Authorization: `token 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`,
-      },
-    }
+    `https://api.github.com/users/${userId}/repos?${params}`
   )
   const data = await response.json()
 
